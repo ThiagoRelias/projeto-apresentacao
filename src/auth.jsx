@@ -2,7 +2,9 @@ import { createContext, useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
+
 export const API = "http://localhost:3000/usuarios";
+export const API_PRODUTOS = "http://localhost:3000/produtos"; 
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "null"));

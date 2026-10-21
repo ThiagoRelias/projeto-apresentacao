@@ -1,21 +1,43 @@
-import { Link } from "react-router-dom";
-import { useCart } from "../../cart";
+import { Link, NavLink } from "react-router-dom";
 
-export default function NavLoja() {
-  const { itens } = useCart();
-  const qtd = itens.reduce((soma, i) => soma + i.qtd, 0);
+export default function NavLoja({ abaAtiva, setAbaAtiva }) {
+  const linkClass = ({ isActive }) =>
+    `nav-link${isActive ? " ativo" : ""}`;
 
   return (
-    <header className="nav">
-      <div className="nav-in">
-        <Link to="/" className="logo">SPORT<span>MAX</span></Link>
-        <nav className="nav-links">
-          <Link to="/produtos">Produtos</Link>
-          <Link to="/sobre">Sobre</Link>
-          <Link to="/faq">FAQ</Link>
-          <Link to="/carrinho">Carrinho{qtd > 0 && <span className="badge">{qtd}</span>}</Link>
-        </nav>
+    <nav className="nav-loja">
+      <Link to="/" className="nav-logo">
+        sport<span>MAX</span>
+      </Link>
+
+      <div className="nav-links">
+        <NavLink
+          to="/produtos"
+          className={linkClass}
+          onClick={() => setAbaAtiva("lista")}
+        >
+          Produtos
+        </NavLink>
+
+        <NavLink
+          to="/cadastro-produto"
+          className={linkClass}
+        >
+          Cadastrar Produto
+        </NavLink>
+
+        <NavLink to="/sobre" className={linkClass}>
+          Sobre
+        </NavLink>
+
+        <NavLink to="/faq" className={linkClass}>
+          FAQ
+        </NavLink>
+
+        <NavLink to="/carrinho" className={linkClass}>
+          Carrinho
+        </NavLink>
       </div>
-    </header>
+    </nav>
   );
 }
